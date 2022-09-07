@@ -17,11 +17,14 @@ from jose import JWTError, jwt
 
 from dotenv import load_dotenv
 
+from . import responses
+
 def setup_routes(app: FastAPI) -> None:
     load_dotenv()
 
     SECRET_KEY = os.environ.get("SECRET_KEY")
     ALGORITHM = os.environ.get("ALGORITHM")
+    ACCESS_TOKEN_EXPIRE_MINUTES = int(os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -77,7 +80,44 @@ def setup_routes(app: FastAPI) -> None:
         if user is None:
             raise credentials_exception
         return user
+
+    @app.post("/token", response_model=schemas.Token, responses={**responses.UNAUTORIZED},tags=["auth"])
+    async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+        user = authenticate_user(form_data.username, form_data.password, db)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Incorrect username or password",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(
+            data={"sub": user.username}, expires_delta=access_token_expires
+        )
+        return {"access_token": access_token, "token_type": "bearer"}
+
     
     @app.get("/api/test")
     async def get_test():
         return "tested"
+
+    @app.post("/users/", response_model=schemas.User, responses={**responses.USER_ALREADY_REGISTERED}, tags=["users"])
+    def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+        db_user = crud.get_user_by_username(db, username=user.username)
+        if db_user:
+            raise HTTPException(status_code=400, detail="Username already registered")
+        return crud.create_user(db=db, user=user)
+
+
+    @app.get("/users/", response_model=List[schemas.User], tags=["users"])
+    def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+        users = crud.get_users(db, skip=skip, limit=limit)
+        return users
+
+    @app.get("/users/me", response_model=schemas.User, responses={**responses.UNAUTORIZED}, tags=["users"])
+    async def read_current_user(current_user: schemas.User = Depends(get_current_user)):
+        return current_user
+
+    @app.put("/users/me", response_model=schemas.User, responses={**responses.UNAUTORIZED}, tags=["users"])
+    async def update_user_info(user: schemas.UserUpdate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+        crud.update_user(db, user, current_user)

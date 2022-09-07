@@ -16,4 +16,5 @@ DB_NAME=fichawork
 # JWT
 SECRET_KEY=<secret>
 ALGORITHM=<for example, HS256>
+ACCESS_TOKEN_EXPIRE_MINUTES=<time in minutes>
 ```
