@@ -1,13 +1,12 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-import Card from './lib/Card.svelte'
-  import Counter from './lib/Counter.svelte'
+  import svelteLogo from "./assets/svelte.svg";
+  import Sidebar from "./lib/Sidebar.svelte";
 </script>
 
 <main>
-  <Counter/>
-  <br>
-  <Card/>
+  <div class="flex ">
+    <Sidebar />
+  </div>
 </main>
 
 <style>
