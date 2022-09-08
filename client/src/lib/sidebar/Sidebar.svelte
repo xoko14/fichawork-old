@@ -4,10 +4,11 @@ import SidebarIcon from "./SidebarIcon.svelte";
 
 export let section: Section;
 
-function setClockIn(): void{ section = Section.CLOCKIN; console.log("click recieved") }
+function setClockIn(): void{ section = Section.CLOCKIN }
 function setHistory(): void{ section = Section.HISTORY }
 function setAccount(): void{ section = Section.ACCOUNT }
 function setExport(): void{ section = Section.EXPORT }
+function setAbout(): void{ section = Section.ABOUT }
 
 </script>
 
@@ -16,4 +17,5 @@ function setExport(): void{ section = Section.EXPORT }
     <SidebarIcon icon="history" tooltip="Past shifts" on:click={setHistory}/>
     <SidebarIcon icon="account_circle" tooltip="Account" on:click={setAccount}/>
     <SidebarIcon icon="cloud_download" tooltip="Export shifts" on:click={setExport}/>
+    <SidebarIcon icon="info" tooltip="About" on:click={setAbout}/>
 </div>

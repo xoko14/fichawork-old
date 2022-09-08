@@ -4,7 +4,7 @@
 
 @layer components{
     .sidebar-icon{
-        @apply relative flex items-center justify-center h-12 w-12 mt-2 mb-2 mx-auto shadow-lg bg-gray-800 text-purple-500
+        @apply relative flex items-center justify-center h-12 w-12 mt-2 last:mt-auto mb-2 mx-auto shadow-lg bg-gray-800 text-purple-500
         hover:bg-purple-600 hover:text-white rounded-lg transition-all;
     }
 
@@ -14,7 +14,15 @@
     }
 
     .section{
-        @apply flex flex-col ml-16 items-center content-center h-screen w-screen;
+        @apply flex flex-col ml-16 items-stretch h-screen w-screen bg-gray-800 text-white;
+    }
+
+    .card{
+        @apply flex flex-col bg-gray-700 h-auto w-2/3 m-4 mx-auto rounded-md shadow items-center p-6;
+    }
+
+    .card-section{
+        @apply w-1/2;
     }
 }
 

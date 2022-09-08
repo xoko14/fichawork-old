@@ -1,6 +1,7 @@
 <script lang="ts">
   import svelteLogo from "./assets/svelte.svg";
 import { Section } from "./lib/Sections";
+import AboutSection from "./lib/sections/AboutSection.svelte";
 import AccountSection from "./lib/sections/AccountSection.svelte";
   import ClockInSection from "./lib/sections/ClockInSection.svelte";
 import ExportSection from "./lib/sections/ExportSection.svelte";
@@ -11,7 +12,7 @@ import ExportSection from "./lib/sections/ExportSection.svelte";
 </script>
 
 <main>
-  <div class="flex ">
+  <div class="flex transition-all">
     <Sidebar bind:section/>
     {#if section == Section.CLOCKIN}
       <ClockInSection />
@@ -21,6 +22,8 @@ import ExportSection from "./lib/sections/ExportSection.svelte";
       <AccountSection/>
     {:else if section == Section.EXPORT}
       <ExportSection/>
+    {:else if section == Section.ABOUT}
+      <AboutSection/>
     {/if}
   </div>
 </main>
