@@ -12,6 +12,10 @@
         @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold
         transition-all duration-100 scale-0 origin-left;
     }
+
+    .section{
+        @apply flex flex-col ml-16 items-center content-center h-screen w-screen;
+    }
 }
 
 .material-symbols-rounded {
@@ -20,4 +24,12 @@
   'wght' 400,
   'GRAD' 200,
   'opsz' 48
+}
+
+.mzauto{
+    margin: 0 auto;
+}
+
+.mautoz{
+    margin: 0 auto;
 }

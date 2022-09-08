@@ -3,7 +3,7 @@
     export let tooltip: string;
 </script>
 
-<div class="sidebar-icon group">
+<button class="sidebar-icon group" on:click>
     <span class="material-symbols-rounded text-4xl">{icon}</span>
     <span class="sidebar-tooltip group-hover:scale-100">{tooltip}</span>
-</div>
+</button>

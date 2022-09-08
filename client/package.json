@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
+    "svelte-i18n": "^3.4.0",
     "svelte-material-icons": "^2.0.4"
   }
 }
