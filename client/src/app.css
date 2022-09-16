@@ -18,7 +18,7 @@
     }
 
     .section{
-        @apply flex flex-col mb-16 md:ml-16 items-stretch h-screen w-screen bg-gray-800 text-white;
+        @apply flex flex-col pb-16 md:pb-0 md:ml-16 items-stretch h-screen w-screen bg-gray-800 text-white;
     }
 
     .card{
