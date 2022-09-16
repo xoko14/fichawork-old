@@ -2,6 +2,8 @@
 
 Simple clock in and out webapp built using Python as the backend and Vite+Svelte as the frontend.
 
+[Live version](https://fichawork.shoudev.com)
+
 ## Enviroment variables
 
 Can be configured directly or through a .env file.
