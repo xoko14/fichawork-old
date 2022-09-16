@@ -32,3 +32,15 @@ def delete_user(db: Session, user_id: int):
     db_user = get_user(db, user_id)
     db.delete(db_user)
     db.commit()
+
+def create_shift(db: Session, shift: schemas.ShiftEntryCreate) -> models.Shift:
+    db_shift = models.Shift(name=shift.name, description=shift.description)
+    db.add(db_shift)
+    db.commit()
+    db.refresh(db_shift)
+    return db_shift
+
+# def get_shift(db: Session, shift_id: )
+
+# def update_shift(db: Session, shift: schemas.ShiftCreate, old_shift: models.Shift) -> models.Shift:
+    

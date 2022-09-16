@@ -24,6 +24,9 @@
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
+    "bcrypt": "^5.0.1",
+    "class-transformer": "^0.5.1",
+    "reflect-metadata": "^0.1.13",
     "svelte-i18n": "^3.4.0",
     "svelte-material-icons": "^2.0.4"
   }

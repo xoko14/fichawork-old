@@ -28,7 +28,7 @@ def setup_routes(app: FastAPI) -> None:
 
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-    oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+    oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/token")
 
     # Dependencies
     def get_db():
@@ -81,7 +81,7 @@ def setup_routes(app: FastAPI) -> None:
             raise credentials_exception
         return user
 
-    @app.post("/token", response_model=schemas.Token, responses={**responses.UNAUTORIZED},tags=["auth"])
+    @app.post("/api/token", response_model=schemas.Token, responses={**responses.UNAUTORIZED},tags=["auth"])
     async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
         user = authenticate_user(form_data.username, form_data.password, db)
         if not user:
@@ -96,12 +96,7 @@ def setup_routes(app: FastAPI) -> None:
         )
         return {"access_token": access_token, "token_type": "bearer"}
 
-    
-    @app.get("/api/test")
-    async def get_test():
-        return "tested"
-
-    @app.post("/users/", response_model=schemas.User, responses={**responses.USER_ALREADY_REGISTERED}, tags=["users"])
+    @app.post("/api/users/", response_model=schemas.User, responses={**responses.USER_ALREADY_REGISTERED}, tags=["users"])
     def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
         db_user = crud.get_user_by_username(db, username=user.username)
         if db_user:
@@ -109,15 +104,15 @@ def setup_routes(app: FastAPI) -> None:
         return crud.create_user(db=db, user=user)
 
 
-    @app.get("/users/", response_model=List[schemas.User], tags=["users"])
+    @app.get("/api/users/", response_model=List[schemas.User], tags=["users"])
     def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
         users = crud.get_users(db, skip=skip, limit=limit)
         return users
 
-    @app.get("/users/me", response_model=schemas.User, responses={**responses.UNAUTORIZED}, tags=["users"])
+    @app.get("/api/users/me", response_model=schemas.User, responses={**responses.UNAUTORIZED}, tags=["users"])
     async def read_current_user(current_user: schemas.User = Depends(get_current_user)):
         return current_user
 
-    @app.put("/users/me", response_model=schemas.User, responses={**responses.UNAUTORIZED}, tags=["users"])
+    @app.put("/api/users/me", response_model=schemas.User, responses={**responses.UNAUTORIZED}, tags=["users"])
     async def update_user_info(user: schemas.UserUpdate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
         crud.update_user(db, user, current_user)

@@ -12,7 +12,7 @@ function setAbout(): void{ section = Section.ABOUT }
 
 </script>
 
-<div class="fixed top-0 left-0 h-screen w-16 m-0 flex flex-col bg-slate-900 text-white shadow">
+<div class="sidebar">
     <SidebarIcon icon="punch_clock" tooltip="Clock in" on:click={setClockIn}/>
     <SidebarIcon icon="history" tooltip="Past shifts" on:click={setHistory}/>
     <SidebarIcon icon="account_circle" tooltip="Account" on:click={setAccount}/>

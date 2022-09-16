@@ -1,3 +1,4 @@
+from datetime import datetime
 from optparse import Option
 from typing import Optional, Type, List
 from pydantic import BaseModel, NoneBytes
@@ -24,6 +25,24 @@ class UserUpdate(BaseModel):
 
 class User(UserBase):
     id: int
+    class Config:
+        orm_mode = True
 
+class ShiftCreate(BaseModel):
+    name: str
+    description:str
+
+class Shift(ShiftCreate):
+    id: int
+    class Config:
+        orm_mode = True
+
+class ShiftEntryCreate(BaseModel):
+    time_clock_in: datetime
+    time_clock_out: datetime
+    description: str
+
+class ShiftEntry(ShiftEntryCreate):
+    id: int
     class Config:
         orm_mode = True
