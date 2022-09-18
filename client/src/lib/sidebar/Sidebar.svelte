@@ -1,14 +1,13 @@
 <script lang="ts">
 import { Section } from "../Sections";
 import SidebarIcon from "./SidebarIcon.svelte";
+import { activeSection } from "./../../store";
 
-export let section: Section;
-
-function setClockIn(): void{ section = Section.CLOCKIN }
-function setHistory(): void{ section = Section.HISTORY }
-function setAccount(): void{ section = Section.ACCOUNT }
-function setExport(): void{ section = Section.EXPORT }
-function setAbout(): void{ section = Section.ABOUT }
+function setClockIn(): void{ activeSection.set(Section.CLOCKIN) }
+function setHistory(): void{ activeSection.set(Section.HISTORY) }
+function setAccount(): void{ activeSection.set(Section.ACCOUNT) }
+function setExport(): void{ activeSection.set(Section.EXPORT) }
+function setAbout(): void{ activeSection.set(Section.ABOUT) }
 
 </script>
 

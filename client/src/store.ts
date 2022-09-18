@@ -1,5 +1,14 @@
 import { User } from './api/models/User';
 import { writable, derived } from 'svelte/store';
+import { Section } from './lib/Sections';
 
-export const endpoint = writable("")
 export const currentUser = writable(new User())
+export const token = writable("")
+token.subscribe(value => {
+    localStorage.setItem("token", value)
+})
+
+export const activeSection = writable(Section[localStorage.getItem("section")]?? Section.CLOCKIN)
+activeSection.subscribe(value =>
+    localStorage.setItem("section", Section[value])
+)

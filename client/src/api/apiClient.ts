@@ -2,14 +2,9 @@ import { UserCreate, User } from "./models/User";
 import { plainToInstance } from "class-transformer";
 
 export class ApiClient{
-    private ENDPOINT: string
-
-    constructor(endpoint: string){
-        this.ENDPOINT = endpoint
-    }
 
     async createUser(userCreate: UserCreate): Promise<User>{
-        var response = await fetch(this.ENDPOINT+"api/users/", {
+        var response = await fetch("api/users/", {
             method: "POST",
             body: JSON.stringify(userCreate)
         })
@@ -18,8 +13,8 @@ export class ApiClient{
 
     async getCurrentUser(): Promise<User>{
         var headers = new Headers()
-        headers.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjYyODkyNTU2fQ.5J7Cb2z8KBVDdBtgroe4SW5ssonr-F_fqaLwcmmCsP8")
-        var response = await fetch(this.ENDPOINT+"api/users/me/",{
+        headers.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjYzNDM0ODEzfQ._yvnGR3a3CzeXZ4_ZEKcZK5SWeJsOkSbI0F-0sEDe1U")        
+        var response = await fetch("api/users/me",{
             headers: headers
         })
         return plainToInstance(User, await response.json())
