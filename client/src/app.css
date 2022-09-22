@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,6 +33,22 @@
     .link{
         @apply hover:text-purple-600 underline;
     }
+
+    .text-input{
+        @apply text-black m-1 p-1 shadow rounded-md
+    }
+
+    .button{
+        @apply bg-purple-500 hover:bg-purple-600 text-lg p-1 rounded-md shadow transition-all px-4
+    }
+
+    .alert-box{
+        @apply border-2 border-red-500 p-2 m-1 rounded-md text-center transition-all
+    }
+}
+
+html{
+    font-family: 'Open Sans', sans-serif;
 }
 
 .material-symbols-rounded {

@@ -6,6 +6,8 @@
   import ClockInSection from "./lib/sections/ClockInSection.svelte";
   import ExportSection from "./lib/sections/ExportSection.svelte";
   import HistorySection from "./lib/sections/HistorySection.svelte";
+  import LoginSection from "./lib/sections/LoginSection.svelte";
+  import SigninSection from "./lib/sections/SigninSection.svelte";
   import Sidebar from "./lib/sidebar/Sidebar.svelte";
   import {activeSection} from "./store"
 </script>
@@ -23,6 +25,10 @@
       <ExportSection />
     {:else if $activeSection == Section.ABOUT}
       <AboutSection />
+    {:else if $activeSection == Section.LOGIN}
+      <LoginSection/>
+    {:else if $activeSection == Section.SIGNIN}
+      <SigninSection/>
     {/if}
   </div>
 </main>

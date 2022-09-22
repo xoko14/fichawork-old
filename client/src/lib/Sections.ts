@@ -4,5 +4,6 @@ export enum Section{
     EXPORT,
     HISTORY,
     LOGIN,
+    SIGNIN,
     ABOUT,
 }

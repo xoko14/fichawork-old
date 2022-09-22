@@ -6,6 +6,6 @@ export class User{
 
 export class UserCreate{
     public username: string
-    public password: string
     public name: string
+    public password: string
 }

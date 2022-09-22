@@ -3,7 +3,7 @@ import { writable, derived } from 'svelte/store';
 import { Section } from './lib/Sections';
 
 export const currentUser = writable(new User())
-export const token = writable("")
+export const token = writable(localStorage.getItem("token")?? "")
 token.subscribe(value => {
     localStorage.setItem("token", value)
 })
