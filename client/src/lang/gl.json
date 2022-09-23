@@ -1,7 +1,7 @@
 {
   "account": {
     "greeting": "Ola, {name}",
-    "logout": "Cerrar sesión"
+    "logout": "Pechar sesión"
   },
   "about": {
     "desc": "Anota, edita e exporta os teus horarios de entrada e salida.",
