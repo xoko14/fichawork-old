@@ -35,23 +35,27 @@
     }
 
     .text-input{
-        @apply text-black m-1 p-1 shadow rounded-md
+        @apply text-black m-1 p-1 shadow rounded-md;
     }
 
     .button{
-        @apply bg-purple-500 hover:bg-purple-600 text-lg p-1 rounded-md shadow transition-all px-4
+        @apply bg-purple-500 hover:bg-purple-600 text-lg p-1 rounded-md shadow transition-all px-4;
     }
 
     .alert-box{
-        @apply border-2 border-red-500 p-2 m-1 rounded-md text-center transition-all
+        @apply border-2 border-red-500 p-2 m-1 rounded-md text-center transition-all;
     }
 
     .message-box{
-        @apply fixed top-0 right-0 m-2 p-2 rounded-md bg-gray-700 bg-opacity-75 border-2 border-purple-500 text-white
+        @apply fixed top-0 right-0 m-2 p-2 rounded-md bg-gray-700 bg-opacity-75 border-2 border-purple-500 text-white;
     }
 
     .tiny-btn{
-        @apply text-gray-400 hover:text-white 
+        @apply text-gray-400 hover:text-white;
+    }
+
+    html{
+        @apply bg-gray-800;
     }
 }
 

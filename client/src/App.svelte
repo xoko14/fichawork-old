@@ -19,7 +19,7 @@
 
 <main>
   {#if $isLoading}
-  <p>Loading...</p>
+  <p></p>
   {:else}
     <div class="flex transition-all">
       <Sidebar/>
