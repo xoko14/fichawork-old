@@ -3,6 +3,7 @@
     import { token, activeSection, message } from "../../store";
     import AlertBox from "../components/AlertBox.svelte";
     import { Section } from "../Sections";
+    import {_} from "svelte-i18n"
 
     let error: boolean = false
     let username = ""
@@ -11,7 +12,7 @@
     async function login(){
         let usrToken = await ApiClient.logIn(username, password)
         if(usrToken.access_token){
-            message.set("Log in successful.")
+            message.set($_('login.success'))
             token.set(usrToken.access_token)
             activeSection.set(Section.CLOCKIN)
         }
@@ -23,15 +24,15 @@
 
 <div class="section">
     <div class="card">
-        <p class="m-auto text-3xl mb-4">Log in</p>
+        <p class="m-auto text-3xl mb-4">{$_('general.login')}</p>
         <div class="flex flex-col mb-4">
-            <input type="text" placeholder="Username" bind:value={username} class="text-input"/>
-            <input type="password" placeholder="Password" bind:value={password} class="text-input"/>
+            <input type="text" placeholder="{ $_('user.username') }" bind:value={username} class="text-input"/>
+            <input type="password" placeholder="{ $_('user.password') }" bind:value={password} class="text-input"/>
         </div>
-        <button on:click={login} class="button">Log in</button>
+        <button on:click={login} class="button">{ $_('general.login') }</button>
         {#if error}
             <div class="mt-4">
-                <AlertBox message="Incorrect username/password"/>
+                <AlertBox message="{$_('login.error')}"/>
             </div>
         {/if}
     </div>

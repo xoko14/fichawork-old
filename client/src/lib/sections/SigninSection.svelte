@@ -4,7 +4,7 @@
     import { User, UserCreate } from "../../api/models/User";
     import AlertBox from "../components/AlertBox.svelte";
     import { Section } from "../Sections";
-    //import {bcrypt} from 'bcrypt'
+    import { _ } from 'svelte-i18n'
 
 
     let username: string
@@ -18,7 +18,7 @@
 
     function verifyUsername(): boolean{
         if(!/^[\w\d\-_]{1,25}$/.test(username?? "")){
-            errorMessage = "Username must have between 1 and 10 characters and only contain letters, numbers, <code>-</code> or <code>_</code>."
+            errorMessage = $_('signin.usernameverification')
             return false
         }
         return true
@@ -26,7 +26,7 @@
 
     function verifyName(): boolean{
         if(!/.{1,100}/.test(name?? "")){
-            errorMessage = "Name must be between 1 and 100 characters."
+            errorMessage = $_('signin.nameverification')
             return false
         }
         return true
@@ -34,18 +34,18 @@
 
     function verifyPassword(): boolean{
         if(!/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}\[\]:;<>,.?\/~_+-=|\\]).{8,32}$/.test(password?? "")){
-            errorMessage = "Password must be between 8 and 32 characters and inlude at least one uppercase, lowercase, number and special character."
+            errorMessage = $_('signin.passwordverification')
             return false
         }
         if(password != rPassword){
-            errorMessage = "Passwords must match."
+            errorMessage = $_('signin.passwordmatch')
             return false
         }
         return true
     }
 
     function verify(){
-        if(!verifyUsername()) {error = true; console.log("failed username"); return}
+        if(!verifyUsername()) {error = true; return}
         if(!verifyName()) {error = true; return}
         if(!verifyPassword()) {error = true; return}
         error = false
@@ -61,11 +61,11 @@
         user.username = username
         ApiClient.createUser(user).then(user => {
             if (user.name == null){
-                errorMessage = "Error creating account."
+                errorMessage = $_('signin.creationerror')
                 error = true
             }
             else{
-                message.set("Sign in successful.")
+                message.set($_('signin.creationsuccess'))
                 activeSection.set(Section.LOGIN)
             }
         })
@@ -75,14 +75,14 @@
 
 <div class="section">
     <div class="card">
-        <p class="m-auto text-3xl mb-4">Sign in</p>
+        <p class="m-auto text-3xl mb-4">{ $_('general.signin') }</p>
         <div class="flex flex-col mb-4">
-            <input type="text" placeholder="Username" bind:value={username} class="text-input"/>
-            <input type="text" placeholder="Name" bind:value={name} class="text-input"/>
-            <input type="password" placeholder="Password" bind:value={password} class="text-input"/>
-            <input type="password" placeholder="Repeat password" bind:value={rPassword} class="text-input"/>
+            <input type="text" placeholder="{$_('user.username')}" bind:value={username} class="text-input"/>
+            <input type="text" placeholder="{ $_('user.name') }" bind:value={name} class="text-input"/>
+            <input type="password" placeholder="{ $_('user.password') }" bind:value={password} class="text-input"/>
+            <input type="password" placeholder="{ $_('user.rpassword') }" bind:value={rPassword} class="text-input"/>
         </div>
-        <button on:click={signin} class="button">Sign in</button>
+        <button on:click={signin} class="button">{ $_('general.signin') }</button>
         {#if error}
             <div class="mt-4">
                 <AlertBox message={errorMessage}/>

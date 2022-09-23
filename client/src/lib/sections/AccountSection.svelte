@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { _ } from "svelte-i18n"
     import { currentUser, token, activeSection} from "./../../store";
 
     import { onMount } from "svelte";
@@ -26,7 +27,7 @@
 
 <div class="section">
     <div class="card">
-        <p class="m-auto text-3xl mb-4">Hi, {$currentUser.name}</p>
-        <button on:click={logout} class="button">Log out</button>
+        <p class="m-auto text-3xl mb-4">{$_("account.greeting", { values: { name: $currentUser.name }})}</p>
+        <button on:click={logout} class="button">{ $_('account.logout') }</button>
     </div>
 </div>

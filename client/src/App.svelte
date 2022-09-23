@@ -11,29 +11,37 @@
   import SigninSection from "./lib/sections/SigninSection.svelte";
   import Sidebar from "./lib/sidebar/Sidebar.svelte";
   import {activeSection, message} from "./store"
+  import {initi18n} from "./i18n"
+  import { isLoading } from 'svelte-i18n'
+
+  initi18n()
 </script>
 
 <main>
-  <div class="flex transition-all">
-    <Sidebar/>
-    {#if $activeSection == Section.CLOCKIN}
-      <ClockInSection />
-    {:else if $activeSection == Section.HISTORY}
-      <HistorySection />
-    {:else if $activeSection == Section.ACCOUNT}
-      <AccountSection />
-    {:else if $activeSection == Section.EXPORT}
-      <ExportSection />
-    {:else if $activeSection == Section.ABOUT}
-      <AboutSection />
-    {:else if $activeSection == Section.LOGIN}
-      <LoginSection/>
-    {:else if $activeSection == Section.SIGNIN}
-      <SigninSection/>
+  {#if $isLoading}
+  <p>Loading...</p>
+  {:else}
+    <div class="flex transition-all">
+      <Sidebar/>
+      {#if $activeSection == Section.CLOCKIN}
+        <ClockInSection />
+      {:else if $activeSection == Section.HISTORY}
+        <HistorySection />
+      {:else if $activeSection == Section.ACCOUNT}
+        <AccountSection />
+      {:else if $activeSection == Section.EXPORT}
+        <ExportSection />
+      {:else if $activeSection == Section.ABOUT}
+        <AboutSection />
+      {:else if $activeSection == Section.LOGIN}
+        <LoginSection/>
+      {:else if $activeSection == Section.SIGNIN}
+        <SigninSection/>
+      {/if}
+    </div>
+    {#if $message}
+      <MessageBox/>
     {/if}
-  </div>
-  {#if $message}
-    <MessageBox/>
   {/if}
 </main>
 
