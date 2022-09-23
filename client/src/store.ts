@@ -9,7 +9,7 @@ token.subscribe(value => {
     localStorage.setItem("token", value)
 })
 
-export const activeSection = writable(Section[localStorage.getItem("section")]?? Section.CLOCKIN)
+export const activeSection = writable(Section[localStorage.getItem("section")]?? Section.LOGIN)
 activeSection.subscribe(value =>
     localStorage.setItem("section", Section[value])
 )
