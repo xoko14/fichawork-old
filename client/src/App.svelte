@@ -1,5 +1,6 @@
 <script lang="ts">
   import svelteLogo from "./assets/svelte.svg";
+    import MessageBox from "./lib/components/MessageBox.svelte";
   import { Section } from "./lib/Sections";
   import AboutSection from "./lib/sections/AboutSection.svelte";
   import AccountSection from "./lib/sections/AccountSection.svelte";
@@ -9,7 +10,7 @@
   import LoginSection from "./lib/sections/LoginSection.svelte";
   import SigninSection from "./lib/sections/SigninSection.svelte";
   import Sidebar from "./lib/sidebar/Sidebar.svelte";
-  import {activeSection} from "./store"
+  import {activeSection, message} from "./store"
 </script>
 
 <main>
@@ -31,6 +32,9 @@
       <SigninSection/>
     {/if}
   </div>
+  {#if $message}
+    <MessageBox/>
+  {/if}
 </main>
 
 <style>

@@ -45,6 +45,14 @@
     .alert-box{
         @apply border-2 border-red-500 p-2 m-1 rounded-md text-center transition-all
     }
+
+    .message-box{
+        @apply fixed top-0 right-0 m-2 p-2 rounded-md bg-gray-700 bg-opacity-75 border-2 border-purple-500 text-white
+    }
+
+    .tiny-btn{
+        @apply text-gray-400 hover:text-white 
+    }
 }
 
 html{

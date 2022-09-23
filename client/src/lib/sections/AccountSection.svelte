@@ -17,11 +17,16 @@
             .then((user) => currentUser.set(user))
     //);
 
+    function logout(){
+        token.set("")
+        activeSection.set(Section.LOGIN)
+    }
+
 </script>
 
 <div class="section">
-    <p class="m-auto">Account section</p>
-    <p>{$currentUser.name}</p>
-
-    <p><button on:click={() => {token.set(""); activeSection.set(Section.LOGIN)}}>Log out</button></p>
+    <div class="card">
+        <p class="m-auto text-3xl mb-4">Hi, {$currentUser.name}</p>
+        <button on:click={logout} class="button">Log out</button>
+    </div>
 </div>

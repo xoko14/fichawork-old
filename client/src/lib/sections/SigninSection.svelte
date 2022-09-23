@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { activeSection, message } from "../../store";
     import { ApiClient } from "../../api/apiClient";
     import { User, UserCreate } from "../../api/models/User";
     import AlertBox from "../components/AlertBox.svelte";
+    import { Section } from "../Sections";
     //import {bcrypt} from 'bcrypt'
 
 
@@ -55,12 +57,16 @@
         if(!verified) return
         let user = new UserCreate();
         user.name = name
-        user.password = password//bcrypt.hashSync(password, 12);
+        user.password = password
         user.username = username
         ApiClient.createUser(user).then(user => {
             if (user.name == null){
                 errorMessage = "Error creating account."
                 error = true
+            }
+            else{
+                message.set("Sign in successful.")
+                activeSection.set(Section.LOGIN)
             }
         })
     }

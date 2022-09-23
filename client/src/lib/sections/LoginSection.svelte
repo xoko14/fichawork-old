@@ -1,6 +1,6 @@
 <script lang="ts">
     import { ApiClient } from "../../api/apiClient";
-    import { token, activeSection } from "../../store";
+    import { token, activeSection, message } from "../../store";
     import AlertBox from "../components/AlertBox.svelte";
     import { Section } from "../Sections";
 
@@ -11,6 +11,7 @@
     async function login(){
         let usrToken = await ApiClient.logIn(username, password)
         if(usrToken.access_token){
+            message.set("Log in successful.")
             token.set(usrToken.access_token)
             activeSection.set(Section.CLOCKIN)
         }
