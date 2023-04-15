@@ -1,8 +1,10 @@
 # FichaWork
 
+#### *_ARCHIEVED REPO. MOVED TO [xoko14/fichawork](https://github.com/xoko14/fichawork)._*
+
 Simple clock in and out webapp built using Python as the backend and Vite+Svelte as the frontend.
 
-[Live version](https://fichawork.shoudev.com)
+~[Live version](https://fichawork.shoudev.com)~
 
 ## Enviroment variables
 
